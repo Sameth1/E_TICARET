@@ -1,0 +1,90 @@
+﻿@page "/productdetail/{id:int}"
+@using Microsoft.AspNetCore.Components
+@using BLL.Services
+@using UI_MVC.Models
+@inject NavigationManager Navigation
+@inject CartService CartService
+
+<h3>Product Detail</h3>
+<form onsubmit ="AddToCart">
+    <input type="hidden" name="productId" value="ProductDetail.Id">
+    <div class="row">
+        <div class="col-auto">
+            <ul class="list-inline pb-3">
+                <li class="list-inline-item">
+                    Size :
+                    <input type="hidden" name="product-size" id="product-size" value="Size">
+                </li>
+                <li class="list-inline-item"><span class="btn btn-success btn-size" onclick ="() => SetSize('S')">S</span></li>
+                <li class="list-inline-item"><span class="btn btn-success btn-size" onclick ="() => SetSize('M')">M</span></li>
+                <li class="list-inline-item"><span class="btn btn-success btn-size" onclick ="() => SetSize('L')">L</span></li>
+                <li class="list-inline-item"><span class="btn btn-success btn-size" onclick ="() => SetSize('XL')">XL</span></li>
+            </ul>
+        </div>
+        <div class="col-auto">
+            <ul class="list-inline pb-3">
+                <li class="list-inline-item text-right">
+                    Quantity
+                    <input type="hidden" name="quantity" id="product-quanity" value="Quantity">
+                </li>
+                <li class="list-inline-item"><span class="btn btn-success" onclick ="DecrementQuantity">-</span></li>
+                <li class="list-inline-item"><span class="badge bg-secondary">Quantity</span></li>
+                <li class="list-inline-item"><span class="btn btn-success" onclick ="IncrementQuantity">+</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row pb-3">
+        <div class="col d-grid">
+            <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+        </div>
+        <div class="col d-grid">
+            <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocart">Add To Cart</button>
+        </div>
+    </div>
+</form>
+@* 
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Product ProductDetail { get; set; } = new Product();
+    private int Quantity { get; set; } = 1;
+    private string Size { get; set; } = "S";
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProductDetail = await LoadProductDetail(Id);
+    }
+
+    private async Task<Product>
+    LoadProductDetail(int id)
+    {
+    // Örnek bir ürün döndür
+    return new Product { Id = id, Name = "Sample Product", Price = 100.0m };
+    }
+
+    private void SetSize(string size)
+    {
+    Size = size;
+    }
+
+    private void IncrementQuantity()
+    {
+    Quantity++;
+    }
+
+    private void DecrementQuantity()
+    {
+    if (Quantity > 1)
+    {
+    Quantity--;
+    }
+    }
+
+    private async Task AddToCart()
+    {
+    await CartService.AddToCartAsync(ProductDetail.Id, Quantity);
+    Navigation.NavigateTo("/cart");
+    }
+    }
+ *@

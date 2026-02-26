@@ -1,0 +1,54 @@
+# Build
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.scc
+
+# Visual Studio
+.vs/
+*.rsuser
+
+# User-specific
+*.userprefs
+appsettings.Development.json
+appsettings.*.local.json
+
+# Publish
+publish/
+*.Publish.xml
+
+# NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+# ASP.NET
+Project_Readme.html
+
+# Keep appsettings but don't commit real production secrets
+# (use Azure/Env for production connection strings)
+# appsettings.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# JetBrains
+.idea/
+*.sln.iml
+
+# Misc
+*.log
+*.tmp

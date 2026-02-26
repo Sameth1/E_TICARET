@@ -1,0 +1,138 @@
+@using UI_MVC.Extensions
+@model UI_MVC.Models.HomeIndexViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Start Content -->
+<div class="container py-5">
+    <div class="row">
+
+        <div class="col-lg-3">
+            <ul class="list-unstyled templatemo-accordion">
+                <li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Categories:
+                        <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul class="collapse show list-unstyled pl-3">
+                        @foreach (var item in Model.Categories)
+                        {
+                            <li>
+                                <a class="text-decoration-none"
+                                   asp-controller="Home"
+                                   asp-action="Category"
+                                   asp-route-title="@item.Name.ToUrl()"
+                                   asp-route-id="@item.Id">
+                                    @item.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Brands:
+                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul id="collapseTwo" class="collapse list-unstyled pl-3">
+                        @foreach (var item in Model.Brands)
+                        {
+                            <li>
+                                <a class="text-decoration-none"
+                                   asp-controller="Home"
+                                   asp-action="Brand"
+                                   asp-route-title="@item.Name.ToUrl()"
+                                   asp-route-id="@item.Id">
+                                    @item.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="row g-3 mb-3">
+                @foreach (var item in Model.Products)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 product-wap rounded-0 h-100">
+                            <div class="card rounded-0">
+                                <img class="card-img rounded-0 img-fluid" src="@item.CoverImageURL">
+                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a class="btn btn-success text-white mt-2"
+                                               asp-controller="Home"
+                                               asp-action="Details"
+                                               asp-route-title="@item.Title?.ToUrl()"
+                                               asp-route-id="@item.Id">
+                                                <i class="far fa-eye"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="btn btn-danger text-white mt-2"
+                                               asp-controller="Favorites"
+                                               asp-action="Add"
+                                               asp-route-productId="@item.Id"
+                                               asp-route-returnUrl="@Context.Request.Path"
+                                               title="Add to Favorites">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <a class="h3 text-decoration-none"
+                                   asp-controller="Home"
+                                   asp-action="Details"
+                                   asp-route-title="@item.Title.ToUrl()"
+                                   asp-route-id="@item.Id">
+                                    @item.Title
+                                </a>
+                                @if (item.Price == item.DiscountedPrice)
+                                {
+                                    <p class="text-center mb-0">₺@item.Price.ToString("0.00")</p>
+                                }
+                                else
+                                {
+                                    <p class="text-center text-danger mb-0"><del>₺@item.Price.ToString("0.00")</del></p>
+                                    <p class="text-center mb-0">₺@item.DiscountedPrice.ToString("0.00")</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <ul class="pagination pagination-lg justify-content-end">
+                    @for (int i = Model.Start; i <= Model.End; i++)
+                    {
+                        if (Model.CurrentPage == i)
+                        {
+                            <li class="page-item disabled">
+                                <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">@i</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark"
+                                   asp-controller="Home"
+                                   asp-action="Index"
+                                   asp-route-page="@i">
+                                    @i
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- End Content -->
