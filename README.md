@@ -1,4 +1,5 @@
-# E-Ticaret Yönetim Sistemi (N-Tier Architecture)
+# E-Ticaret Yönetim Sistemi
+
 
 Bu çalışma, kurumsal yazılım geliştirme prensiplerine uygun olarak, modüler ve sürdürülebilir bir e-ticaret altyapısının ASP.NET Core MVC framework'ü ile kurgulanmasını hedeflemektedir. Projenin temel odağı, iş mantığının (Business Logic) sunum katmanından tamamen ayrıştırılması ve veri erişim süreçlerinin merkezi bir yapıda yönetilmesidir.
 
